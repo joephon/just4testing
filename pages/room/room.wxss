@@ -1,0 +1,30 @@
+/* pages/room.wxss */
+page {
+  background-color: rgb(250, 237, 239);
+}
+
+.wrapper {
+  display: flex;
+  margin: 1em;
+  padding: 1em;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ece5e5;
+  box-sizing: border-box;
+}
+
+.left {
+  flex: 7;
+  padding-right: 1em;
+}
+
+.left button {
+  width: 100%;
+  margin-top: 1em;
+  background-color: rgb(250, 237, 239);
+}
+
+.right {
+  filter: blur(2px);
+  flex: 3;
+}

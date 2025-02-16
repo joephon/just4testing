@@ -1,0 +1,17 @@
+<!--pages/room.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="tip-done">
+    <rich-text nodes="{{text}}"></rich-text>
+  </view>
+
+  <view class="wrapper">
+    <view class='left'>
+      <view>综合匹配度：97.88</view>
+      <view>共同爱好：3</view>
+      <view>地理距离：4</view>
+      <view>灵魂距离：2</view>
+      <button bind:tap="bindtap">聊一聊</button>
+    </view>
+    <image class='right' src="{{pic}}" mode="widthFix"></image>
+  </view>
+</scroll-view>

@@ -1,0 +1,32 @@
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+.item {
+  margin-top: 20rpx;
+  text-align: center;
+}
+.item:last-child {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.wrapper {
+  display: flex;
+  padding: 16px;
+  margin: 0 1em;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border-top: .5px solid rgba(0, 0, 0, 0.1);
+  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+  color: black;
+  background-color: white;
+}
+
+.input {
+  flex: 1;
+}
