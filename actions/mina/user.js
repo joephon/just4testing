@@ -10,7 +10,7 @@ async function login(obj) {
 
 async function getQa(obj) {
   const res = await req('/qa', {
-    method: 'post',
+    method: 'get',
     data: obj,
   })
   return res

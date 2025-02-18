@@ -63,12 +63,19 @@ Page({
 
   async getGps() {
     // mock
+    const { currentIndex, qa } = this.data
+    // 北京大致纬度范围：39.4°N - 41.6°N
+    let latitude = (Math.random() * 2.2) + 39.4;
+    // 北京大致经度范围：115.7°E - 117.4°E
+    let longitude = (Math.random() * 1.7) + 115.7;
+    qa[currentIndex].value = [latitude, longitude]
+    this.setData({ qa })
+
     wx.showToast({
       title: '模拟拿到gps定位，真实接口需要申请',
       icon: 'none',
       duration: 3000
     })
-
 
     // wx.getLocation({
     //   kind: 'gcj02',
@@ -97,6 +104,7 @@ Page({
   async next() {
     const currentIndex = this.data.currentIndex + 1 
     if (currentIndex >= this.data.qa.length) {
+      return console.log(this.data.qa)
       wx.showLoading({
         title: '开始匹配',
       })
