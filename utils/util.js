@@ -6,13 +6,7 @@ function req(path, obj, auth = true) {
   }
 
   if (auth) {
-    try {
-      const token = wx.getStorageSync('accessToken')
-      header['authorization'] = token
-    } catch (error) {
-      console.log(error)
-      return
-    }
+    header['authorization'] = getApp().globalData.accessToken
   }
    
   return new Promise((resove, reject) => {

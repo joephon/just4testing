@@ -1,19 +1,15 @@
 <!--logs.wxml-->
 <scroll-view class="scrollarea" scroll-y type="list">
-  <!-- <block wx:for="{{qa}}" wx:key="key" wx:for-item="item">
-    <view class="item">{{index + 1}}. {{item.key}}: {{item.value}}</view>
-  </block> -->
-
   <view class="tip">
     <rich-text nodes="{{currentTip}}"></rich-text>
   </view>
   <image class="logo" src="{{logo}}"></image>
 
-  <block wx:if="{{current.type === 'gps'}}">
+  <block wx:if="{{current.kind === 'gps'}}">
     <button class='qabtn' bind:tap="getGps" disabled="{{!canClick}}">点击获取当前定位</button>
   </block>
 
-  <block wx:if="{{current.type === 'text'}}">
+  <block wx:if="{{current.kind === 'text'}}">
     <view class="wrapper">
       <input type="text" class="input" placeholder="请输入" bind:change="onInputChange" value="{{current.value}}"/>
     </view>

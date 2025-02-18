@@ -8,6 +8,14 @@ async function login(obj) {
   return res
 }
 
+async function getQa(obj) {
+  const res = await req('/qa', {
+    method: 'post',
+    data: obj,
+  })
+  return res
+}
+
 module.exports = {
-  login,
+  login, getQa,
 }

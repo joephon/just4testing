@@ -1,25 +1,10 @@
 // logs.js
-const { sleep } = require('../../utils/util.js')
-
-const qa = [
-  { key: '经常去哪玩？', value: '', tips: '写商圈吧，或者什么滑雪场都行（如三里屯、南山滑雪场）', type: 'gps' /* text, gps */ },
-  { key: '在哪块工作？', value: '', tips: '比如某个写字楼，某个地铁站附近', type: 'gps'},
-  { key: '住在哪块？', value: '', tips: '考虑女生安全，不用写得太具体；男生自便', type: 'gps'},
-  { key: '你的性别', value: '', tips: '', type: 'text'},  // male, female
-  { key: '哪年出生呢？', value: '', tips: '', type: 'text'},
-  { key: '你的身高', value: '', tips: '单位：厘米', type: 'text'},
-  { key: '你的体重', value: '', tips: '单位：公斤', type: 'text'},
-  { key: '老家哪呢？', value: '', tips: '写省/市/区县都可以', type: 'text'},
-  { key: '工作行业', value: '', tips: '如：金融、时尚、待业、学生等', type: 'text'},
-  { key: 'MBTI', value: '', tips: '不知道填星座也行', type: 'text'},
-  { key: '吸烟与否', value: '', tips: '烟民之间，优先匹配', type: 'text'}, // 吸烟，不吸烟
-  { key: '喝咖啡频率', value: '', tips: '咖友之间，优先匹配', type: 'text'}, // 每天（经常）， 偶尔， 从不
-  { key: '吃辣情况', value: '', tips: '辣党之间，优先匹配', type: 'text'}, // 无辣不欢，一般般，我服了！一点都吃不了！！！
-]
+const { sleep } = require('../../utils/util')
+const { getQa } = require('../../actions/mina/user')
 
 Page({
   data: {
-    qa,
+    qa: [],
     logo: getApp().globalData.defaultAvatarUrl,
     currentIndex: 0,
     currentTip: '',
@@ -28,7 +13,27 @@ Page({
   },
 
   onLoad() {
-    this.play()
+    this.getQa().then(() => this.play())
+  },
+
+  async getQa() {
+    try {
+      const { errMsg, data } = await getQa()
+      if (errMsg !== 'request:ok') return wx.showToast({
+        title: errMsg,
+      })
+      if (data.errMsg !== 'SUCCESS') return wx.showToast({
+        title: data.errMsg,
+      })
+
+      this.setData({ qa: data.data.result })
+      console.log(this.data.qa[0])
+    } catch (error) {
+      console.log(error)
+      wx.showToast({
+        title: error,
+      })
+    }
   },
 
   async play() {
@@ -66,7 +71,7 @@ Page({
 
 
     // wx.getLocation({
-    //   type: 'gcj02',
+    //   kind: 'gcj02',
     //   success (res) {
     //     const latitude = res.latitude
     //     const longitude = res.longitude
@@ -91,7 +96,7 @@ Page({
 
   async next() {
     const currentIndex = this.data.currentIndex + 1 
-    if (currentIndex >= qa.length) {
+    if (currentIndex >= this.data.qa.length) {
       wx.showLoading({
         title: '开始匹配',
       })
